@@ -138,6 +138,7 @@
         var montoPrestado = params.has('montoPrestado') ? params.get('montoPrestado') : "0.00";
         var jugada = params.has('jugada') ? params.get('jugada') : "0";
         var montoApuesta = params.has('montoApuesta') ? params.get('montoApuesta') : "0.00";
+        var pie = params.has('pie') ? params.get('pie') : "";
 
         
         montoPrestado = parseFloat(montoPrestado).toLocaleString('en-US', { minimumFractionDigits: 2 });
@@ -166,6 +167,8 @@
             <p id="jugada" ></p>     
             <p id="diaJugada" ></p>     
         </div>
+
+         
         
 
         </br>
@@ -192,6 +195,13 @@
             <p>_______________________________________</p>
               <p id="cliente"></p>
         </div>
+
+        <div class="details">
+            <p id="pie"></p>
+        </div>  
+        
+
+
     </div>  
 
 
@@ -211,6 +221,7 @@
         //valores datos de la factura
         var elemento15=document.getElementById("montoPrestado").textContent = "Monto Prestado: " + montoPrestado
         var elemento16=document.getElementById("diaJugada").textContent = "Día de la Jugada: " + diaJugada
+        var elemento17=document.getElementById("pie").textContent = pie
         var elemento12=document.getElementById("jugada").textContent = "Jugada a realizar: " + jugada
         var elemento14=document.getElementById("montoApuesta").textContent = "Monto Apuesta: " + montoApuesta
 
