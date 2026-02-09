@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=60mm, initial-scale=1.0"> <!-- Cambia el ancho de la vista para el papel de 58mm -->
+    <title>Prestamo</title>
+    <style>
+        body {
+            font-family: tahoma, Helvetica, sans-serif; /* Ajuste de fuente */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-size: 3mm; /* Tamaño de letra similar al primer código */
+        }
+
+        .recibo {
+            max-width: 60mm; /* Ancho máximo similar al primer código */
+            margin: auto; /* Centrar en la página */
+        }
+
+        .header, .footer, .items, .totals {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .details {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .header img {
+            max-width: 50mm; /* Ajusta el tamaño de la imagen para que se ajuste al ancho de la impresora térmica */
+        }
+
+        .header p, .footer p, .signature p {
+            margin: 0;
+            padding: 1mm 0; /* Margen y padding similar al primer código */
+        }
+
+        .items {
+            border-top: 1px dashed #000;
+            padding-top: 2mm;
+            margin-top: 2mm;
+            border-top: 1px dashed #000;
+            
+        }
+
+
+
+        .totals {
+            border-top: 1px dashed #000;
+            padding-top: 1mm;
+            margin-top: 2mm;
+        }
+
+        .lastTotal {
+            font-size: 5mm;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .totalsizquierdo {
+            border-top: 1px dashed #000;
+            padding-top: 1mm;
+            margin-top: 2mm;
+            text-align: right;
+            font-size: 3mm;
+        }
+
+        .totals td {
+            text-align: center;
+            font-size: 3mm; /* Tamaño de letra ajustado */
+        }
+
+        .totals .label {
+            text-align: left;
+        }
+
+        .totals .labela {
+            text-align: left;
+        }
+
+        .creditos {
+            display: none;
+            padding-top: 2mm;
+            margin-top: 2mm;
+        }
+
+        .items th, .items td {
+            text-align: left;
+            font-size: 3mm; /* Tamaño de letra ajustado */
+        }
+
+        .items .pro{
+            text-align: right;
+            font-size: 3mm; /* Tamaño de letra ajustado */
+        }
+
+
+
+        .items th {
+            font-weight: bold;
+        }
+
+
+
+        
+
+        .signature {
+            text-align: center;
+            margin-top: 5mm;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+
+<body onload="window.print()" onfocus="window.close()">
+
+
+
+    <script>
+        // Obtener los parámetros de la URL
+        const params = new URLSearchParams(window.location.search);
+
+        var idLogo = params.has('idLogo') ? params.get('idLogo') : "17cXW3U50L2cL4xE4lGaF1iIahY01UhAD&sz=w1000";
+
+        //valores datos de la factura
+        var noFactura = params.has('noFactura') ? params.get('noFactura') : "noFactura";
+        var usuario = params.has('usuario') ? params.get('usuario') : "usuario";
+        var cliente= params.has('cliente') ? params.get('cliente') : "cliente";
+
+        var fecha = params.has('fecha') ? params.get('fecha') : "fecha";
+        var hora = params.has('hora') ? params.get('hora') : "hora";
+        var diaJugada = params.has('diaJugada') ? params.get('diaJugada') : "diaJugada";
+
+        var montoPrestado = params.has('montoPrestado') ? params.get('montoPrestado') : "0.00";
+        var jugada = params.has('jugada') ? params.get('jugada') : "0";
+        var montoApuesta = params.has('montoApuesta') ? params.get('montoApuesta') : "0.00";
+
+        
+        montoPrestado = parseFloat(montoPrestado).toLocaleString('en-US', { minimumFractionDigits: 2 });
+        montoApuesta = parseFloat(montoApuesta).toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+        
+    </script>
+    <div class="recibo">
+        <div class="header">
+            <img id="imagenLogo" src="https://drive.google.com/thumbnail?id=17cXW3U50L2cL4xE4lGaF1iIahY01UhAD&sz=w1000" width="1000" height="100" alt="Logo">
+            </br>
+            </br>
+            <p>PRESTAMO</p>
+        </div>
+        
+        <div class="details">
+            <p id="noFactura"></p>
+            <p id="fecha">Fecha: </p>
+            <p id="hora">Hora: </p>
+        </div>      
+
+        <div class="lastTotal">
+            <p id="tituloAbono" >DETALLES</p>           
+            <p id="montoPrestado" ></p>        
+            <p id="montoApuesta" ></p>          
+            <p id="jugada" ></p>     
+            <p id="diaJugada" ></p>     
+        </div>
+        
+
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+
+
+        
+
+
+        
+        <div id="signature" class="signature">
+            <p>_______________________________________</p>
+            <p id="usuario"></p>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            </br>
+            <p>_______________________________________</p>
+              <p id="cliente"></p>
+        </div>
+    </div>  
+
+
+    
+    <script>
+
+        var elemento30= document.getElementById('imagenLogo').src ='https://drive.google.com/thumbnail?id=' + idLogo;
+
+        
+        // Valores encabezado despues del logo
+        var elemento1=document.getElementById("noFactura").textContent = "ID No. #" + noFactura
+        var elemento2=document.getElementById("usuario").textContent ="Entrega: " + usuario 
+        var elemento2=document.getElementById("cliente").textContent ="Recibe: " + cliente 
+        var elemento4=document.getElementById("fecha").textContent = "Fecha: " + fecha 
+        var elemento5=document.getElementById("hora").textContent = "Hora: " + hora
+
+        //valores datos de la factura
+        var elemento15=document.getElementById("montoPrestado").textContent = "Monto Prestado: " + montoPrestado
+        var elemento16=document.getElementById("diaJugada").textContent = "Día de la Jugada: " + diaJugada
+        var elemento12=document.getElementById("jugada").textContent = "Jugada a realizar: " + jugada
+        var elemento14=document.getElementById("montoApuesta").textContent = "Monto Apuesta: " + montoApuesta
+
+
+    </script>
+
+</body>
+</html>
